@@ -150,6 +150,100 @@
   --cs-maxw-guide: 1080px;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .btn,
+  :root:not([data-theme="light"]) .song-card,
+  :root:not([data-theme="light"]) .setlist,
+  :root:not([data-theme="light"]) .featured-card,
+  :root:not([data-theme="light"]) .badge,
+  :root:not([data-theme="light"]) .pill,
+  :root:not([data-theme="light"]) .field,
+  :root:not([data-theme="light"]) .input,
+  :root:not([data-theme="light"]) .textarea,
+  :root:not([data-theme="light"]) .select,
+  :root:not([data-theme="light"]) .segmented,
+  :root:not([data-theme="light"]) .check,
+  :root:not([data-theme="light"]) .radio,
+  :root:not([data-theme="light"]) .switch,
+  :root:not([data-theme="light"]) .topnav,
+  :root:not([data-theme="light"]) .sidenav,
+  :root:not([data-theme="light"]) .pane,
+  :root:not([data-theme="light"]) .pane-head,
+  :root:not([data-theme="light"]) .pane-body,
+  :root:not([data-theme="light"]) .stack {
+    color-scheme: dark;
+    --cs-ink-0: #1A191D;
+    --cs-ink-50: #121114;
+    --cs-ink-100: #232126;
+    --cs-ink-200: #34313A;
+    --cs-ink-300: #4A4750;
+    --cs-ink-500: #8F8C96;
+    --cs-ink-600: #A9A6B0;
+    --cs-ink-700: #C7C4CC;
+    --cs-ink-1000: #F4F2F6;
+    --cs-success-surface: #12261A;
+    --cs-success-fg: #6FCF97;
+    --cs-warning-surface: #2B2210;
+    --cs-warning-fg: #E8B84F;
+    --cs-danger-surface: #2E111A;
+    --cs-danger-fg: #F08AA3;
+    --cs-info-surface: #11202F;
+    --cs-info-fg: #7FB2E8;
+    --cs-focus-ring: 0 0 0 2px var(--cs-ink-0), 0 0 0 4px var(--cs-crimson-300);
+    --cs-e-1: 0 1px 2px rgba(0, 0, 0, 0.30);
+    --cs-e-panel: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --cs-e-2: 0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 14px -2px rgba(0, 0, 0, 0.45);
+    --cs-e-3: 0 2px 6px rgba(0, 0, 0, 0.30), 0 16px 32px -6px rgba(0, 0, 0, 0.55);
+    --cs-e-overlay: 0 4px 10px rgba(0, 0, 0, 0.35), 0 24px 48px -10px rgba(0, 0, 0, 0.65);
+  }
+}
+
+:root[data-theme="dark"] .btn,
+:root[data-theme="dark"] .song-card,
+:root[data-theme="dark"] .setlist,
+:root[data-theme="dark"] .featured-card,
+:root[data-theme="dark"] .badge,
+:root[data-theme="dark"] .pill,
+:root[data-theme="dark"] .field,
+:root[data-theme="dark"] .input,
+:root[data-theme="dark"] .textarea,
+:root[data-theme="dark"] .select,
+:root[data-theme="dark"] .segmented,
+:root[data-theme="dark"] .check,
+:root[data-theme="dark"] .radio,
+:root[data-theme="dark"] .switch,
+:root[data-theme="dark"] .topnav,
+:root[data-theme="dark"] .sidenav,
+:root[data-theme="dark"] .pane,
+:root[data-theme="dark"] .pane-head,
+:root[data-theme="dark"] .pane-body,
+:root[data-theme="dark"] .stack {
+  color-scheme: dark;
+  --cs-ink-0: #1A191D;
+  --cs-ink-50: #121114;
+  --cs-ink-100: #232126;
+  --cs-ink-200: #34313A;
+  --cs-ink-300: #4A4750;
+  --cs-ink-500: #8F8C96;
+  --cs-ink-600: #A9A6B0;
+  --cs-ink-700: #C7C4CC;
+  --cs-ink-1000: #F4F2F6;
+  --cs-success-surface: #12261A;
+  --cs-success-fg: #6FCF97;
+  --cs-warning-surface: #2B2210;
+  --cs-warning-fg: #E8B84F;
+  --cs-danger-surface: #2E111A;
+  --cs-danger-fg: #F08AA3;
+  --cs-info-surface: #11202F;
+  --cs-info-fg: #7FB2E8;
+  --cs-focus-ring: 0 0 0 2px var(--cs-ink-0), 0 0 0 4px var(--cs-crimson-300);
+  --cs-e-1: 0 1px 2px rgba(0, 0, 0, 0.30);
+  --cs-e-panel: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --cs-e-2: 0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 14px -2px rgba(0, 0, 0, 0.45);
+  --cs-e-3: 0 2px 6px rgba(0, 0, 0, 0.30), 0 16px 32px -6px rgba(0, 0, 0, 0.55);
+  --cs-e-overlay: 0 4px 10px rgba(0, 0, 0, 0.35), 0 24px 48px -10px rgba(0, 0, 0, 0.65);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn,
   .song-card,

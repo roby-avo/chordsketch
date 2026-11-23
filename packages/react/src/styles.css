@@ -137,6 +137,70 @@
   --cs-maxw-guide: 1080px;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .chordsketch-chord-pro-editor,
+  :root:not([data-theme="light"]) .chordsketch-chord-pro-preview,
+  :root:not([data-theme="light"]) .chordsketch-source-area,
+  :root:not([data-theme="light"]) .chordsketch-split-layout,
+  :root:not([data-theme="light"]) .chordsketch-preview {
+    color-scheme: dark;
+    --cs-ink-0: #1A191D;
+    --cs-ink-50: #121114;
+    --cs-ink-100: #232126;
+    --cs-ink-200: #34313A;
+    --cs-ink-300: #4A4750;
+    --cs-ink-500: #8F8C96;
+    --cs-ink-600: #A9A6B0;
+    --cs-ink-700: #C7C4CC;
+    --cs-ink-1000: #F4F2F6;
+    --cs-success-surface: #12261A;
+    --cs-success-fg: #6FCF97;
+    --cs-warning-surface: #2B2210;
+    --cs-warning-fg: #E8B84F;
+    --cs-danger-surface: #2E111A;
+    --cs-danger-fg: #F08AA3;
+    --cs-info-surface: #11202F;
+    --cs-info-fg: #7FB2E8;
+    --cs-focus-ring: 0 0 0 2px var(--cs-ink-0), 0 0 0 4px var(--cs-crimson-300);
+    --cs-e-1: 0 1px 2px rgba(0, 0, 0, 0.30);
+    --cs-e-panel: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --cs-e-2: 0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 14px -2px rgba(0, 0, 0, 0.45);
+    --cs-e-3: 0 2px 6px rgba(0, 0, 0, 0.30), 0 16px 32px -6px rgba(0, 0, 0, 0.55);
+    --cs-e-overlay: 0 4px 10px rgba(0, 0, 0, 0.35), 0 24px 48px -10px rgba(0, 0, 0, 0.65);
+  }
+}
+
+:root[data-theme="dark"] .chordsketch-chord-pro-editor,
+:root[data-theme="dark"] .chordsketch-chord-pro-preview,
+:root[data-theme="dark"] .chordsketch-source-area,
+:root[data-theme="dark"] .chordsketch-split-layout,
+:root[data-theme="dark"] .chordsketch-preview {
+  color-scheme: dark;
+  --cs-ink-0: #1A191D;
+  --cs-ink-50: #121114;
+  --cs-ink-100: #232126;
+  --cs-ink-200: #34313A;
+  --cs-ink-300: #4A4750;
+  --cs-ink-500: #8F8C96;
+  --cs-ink-600: #A9A6B0;
+  --cs-ink-700: #C7C4CC;
+  --cs-ink-1000: #F4F2F6;
+  --cs-success-surface: #12261A;
+  --cs-success-fg: #6FCF97;
+  --cs-warning-surface: #2B2210;
+  --cs-warning-fg: #E8B84F;
+  --cs-danger-surface: #2E111A;
+  --cs-danger-fg: #F08AA3;
+  --cs-info-surface: #11202F;
+  --cs-info-fg: #7FB2E8;
+  --cs-focus-ring: 0 0 0 2px var(--cs-ink-0), 0 0 0 4px var(--cs-crimson-300);
+  --cs-e-1: 0 1px 2px rgba(0, 0, 0, 0.30);
+  --cs-e-panel: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --cs-e-2: 0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 14px -2px rgba(0, 0, 0, 0.45);
+  --cs-e-3: 0 2px 6px rgba(0, 0, 0, 0.30), 0 16px 32px -6px rgba(0, 0, 0, 0.55);
+  --cs-e-overlay: 0 4px 10px rgba(0, 0, 0, 0.35), 0 24px 48px -10px rgba(0, 0, 0, 0.65);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .chordsketch-chord-pro-editor,
   .chordsketch-chord-pro-preview,

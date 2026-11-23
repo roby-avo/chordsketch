@@ -191,7 +191,7 @@ function parseTokens(inner) {
 }
 
 /** Build the full generated token region (selector block + @media override). */
-function buildBlock(target, mainItems, overrideItems) {
+function buildBlock(target, mainItems, overrideItems, darkItems) {
   const name = (n) => (target.prefix ? `cs-${n}` : n);
   // Rewrite token references to the prefixed namespace, tolerating whitespace
   // after the paren (`var( --x )`) so a spaced reference is not left dangling.
@@ -222,7 +222,31 @@ function buildBlock(target, mainItems, overrideItems) {
     "}",
   ];
 
-  return `${lines.join("\n")}\n\n${media.join("\n")}`;
+  // Dark theme. Each target selector is scoped under the root element's theme
+  // state so the override outranks the selector's own token declaration
+  // (`:root[...] .btn` beats `.btn`). A `:root` target collapses to the root
+  // selector itself rather than a descendant of it.
+  const scoped = (rootSel) =>
+    target.selectors
+      .map((s) => (s === ":root" ? `  ${rootSel}` : `  ${rootSel} ${s}`))
+      .join(",\n");
+  const darkBody = [
+    "    color-scheme: dark;",
+    ...darkItems.map((it) => decl(it, "    ")),
+  ];
+  const dark = [
+    "@media (prefers-color-scheme: dark) {",
+    `${scoped(':root:not([data-theme="light"])')} {`,
+    ...darkBody,
+    "  }",
+    "}",
+    "",
+    `${scoped(':root[data-theme="dark"]').replace(/^ {2}/gm, "")} {`,
+    ...darkBody.map((l) => l.slice(2)),
+    "}",
+  ];
+
+  return `${lines.join("\n")}\n\n${dark.join("\n")}\n\n${media.join("\n")}`;
 }
 
 /** Base token names (cs- prefix stripped) declared anywhere in a block. */
@@ -278,6 +302,14 @@ function main() {
     /:root\s*\{/,
   );
 
+  // Dark theme (OS-driven + forced). The two blocks must declare identical
+  // tokens; both must override only tokens the light block also declares.
+  const darkMediaInner = sliceBlock(
+    sliceBlock(tokens, /@media \(prefers-color-scheme: dark\)\s*\{/),
+    /:root:not\(\[data-theme="light"\]\)\s*\{/,
+  );
+  const darkForcedInner = sliceBlock(tokens, /:root\[data-theme="dark"\]\s*\{/);
+
   // Parser-independent ground truth: every declaration name in the source.
   // Parser blind spots are detected by comparing against it. Duplicates are
   // checked within each block — a token legitimately appears in both `:root`
@@ -293,6 +325,19 @@ function main() {
 
   const mainItems = parseTokens(mainInner);
   const overrideItems = parseTokens(overrideInner);
+  const darkItems = parseTokens(darkMediaInner);
+  const darkForcedItems = parseTokens(darkForcedInner);
+  const sig = (items) => JSON.stringify(items.map((i) => [i.name, i.value]));
+  if (sig(darkItems) !== sig(darkForcedItems)) {
+    throw new Error(
+      "tokens.css: the prefers-color-scheme dark block and the :root[data-theme=\"dark\"] block declare different tokens",
+    );
+  }
+  const lightNames = new Set(mainItems.map((i) => i.name));
+  const darkOnly = darkItems.filter((i) => !lightNames.has(i.name)).map((i) => i.name);
+  if (darkOnly.length) {
+    throw new Error(`tokens.css: dark theme overrides token(s) the light :root block does not declare: ${darkOnly.join(", ")}`);
+  }
   const sourceNames = new Set([...mainItems, ...overrideItems].map((i) => i.name));
 
   const notParsed = [...rawSet].filter((n) => !sourceNames.has(n));
@@ -309,7 +354,7 @@ function main() {
   // target never leaves an earlier one written.
   const outputs = [];
   for (const target of TARGETS) {
-    const block = buildBlock(target, mainItems, overrideItems);
+    const block = buildBlock(target, mainItems, overrideItems, darkItems);
 
     // Self-check: the emitted declaration set equals the source token set.
     const emitted = emittedNames(block, target.prefix);
