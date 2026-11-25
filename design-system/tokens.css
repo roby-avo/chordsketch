@@ -137,6 +137,78 @@
   --maxw-guide:   1080px;
 }
 
+/*
+ * Dark theme. Only the tokens that change are redeclared; everything else
+ * (crimson accent, type, space, radius, motion) is shared. The ink scale is
+ * remapped rather than inverted per component, so every `var(--ink-*)`
+ * pairing in the component rules (ink-1000 fill + ink-0 text, surface on
+ * canvas) stays coherent. Selection:
+ *   - follows the OS (`prefers-color-scheme: dark`) unless the page opts out
+ *     with `data-theme="light"` on the root element;
+ *   - `data-theme="dark"` forces it regardless of the OS.
+ * The two blocks below MUST declare identical tokens;
+ * scripts/build-tokens.mjs fails if they differ.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink-0:    #1A191D;
+    --ink-50:   #121114;
+    --ink-100:  #232126;
+    --ink-200:  #34313A;
+    --ink-300:  #4A4750;
+    --ink-500:  #8F8C96;
+    --ink-600:  #A9A6B0;
+    --ink-700:  #C7C4CC;
+    --ink-1000: #F4F2F6;
+
+    --success-surface: #12261A;
+    --success-fg:      #6FCF97;
+    --warning-surface: #2B2210;
+    --warning-fg:      #E8B84F;
+    --danger-surface:  #2E111A;
+    --danger-fg:       #F08AA3;
+    --info-surface:    #11202F;
+    --info-fg:         #7FB2E8;
+
+    --focus-ring: 0 0 0 2px var(--ink-0), 0 0 0 4px var(--crimson-300);
+
+    --e-1:       0 1px 2px rgba(0, 0, 0, 0.30);
+    --e-panel:   0 1px 2px rgba(0, 0, 0, 0.25);
+    --e-2:       0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 14px -2px rgba(0, 0, 0, 0.45);
+    --e-3:       0 2px 6px rgba(0, 0, 0, 0.30), 0 16px 32px -6px rgba(0, 0, 0, 0.55);
+    --e-overlay: 0 4px 10px rgba(0, 0, 0, 0.35), 0 24px 48px -10px rgba(0, 0, 0, 0.65);
+  }
+}
+
+:root[data-theme="dark"] {
+  --ink-0:    #1A191D;
+  --ink-50:   #121114;
+  --ink-100:  #232126;
+  --ink-200:  #34313A;
+  --ink-300:  #4A4750;
+  --ink-500:  #8F8C96;
+  --ink-600:  #A9A6B0;
+  --ink-700:  #C7C4CC;
+  --ink-1000: #F4F2F6;
+
+  --success-surface: #12261A;
+  --success-fg:      #6FCF97;
+  --warning-surface: #2B2210;
+  --warning-fg:      #E8B84F;
+  --danger-surface:  #2E111A;
+  --danger-fg:       #F08AA3;
+  --info-surface:    #11202F;
+  --info-fg:         #7FB2E8;
+
+  --focus-ring: 0 0 0 2px var(--ink-0), 0 0 0 4px var(--crimson-300);
+
+  --e-1:       0 1px 2px rgba(0, 0, 0, 0.30);
+  --e-panel:   0 1px 2px rgba(0, 0, 0, 0.25);
+  --e-2:       0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 14px -2px rgba(0, 0, 0, 0.45);
+  --e-3:       0 2px 6px rgba(0, 0, 0, 0.30), 0 16px 32px -6px rgba(0, 0, 0, 0.55);
+  --e-overlay: 0 4px 10px rgba(0, 0, 0, 0.35), 0 24px 48px -10px rgba(0, 0, 0, 0.65);
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --dur-1: 0ms;

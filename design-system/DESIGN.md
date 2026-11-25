@@ -106,6 +106,25 @@ Not pure gray. A faint red tint keeps it in harmony with crimson.
 Ratios verified with the [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/).
 Re-measure when a token's hex value changes.
 
+### 2.5 Dark theme
+
+`tokens.css` ships a dark theme as a second set of values for the ink
+scale, the semantic surface / foreground pairs, the focus ring and the
+elevation shadows. The crimson accent, type, space, radius and motion
+tokens are shared. The ink scale is remapped (`--ink-0` is the dark
+surface, `--ink-1000` the light text), so component rules that pair
+`ink-1000` with `ink-0` stay coherent without per-component dark rules.
+
+- With no attribute on the root element the theme follows the OS
+  (`prefers-color-scheme: dark`).
+- `data-theme="light"` on the root element opts out of the OS setting;
+  `data-theme="dark"` forces dark.
+- The two dark blocks in `tokens.css` must declare identical tokens;
+  `scripts/build-tokens.mjs` fails otherwise, and projects both into the
+  generated stylesheets.
+- Dark text/surface contrast has not been re-measured with the WebAIM
+  checker for every pairing (see the note above).
+
 ---
 
 ## 3. Typography
